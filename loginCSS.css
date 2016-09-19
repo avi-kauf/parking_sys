@@ -1,0 +1,22 @@
+article{
+   
+	width: 980px;
+}
+
+aside#new{
+	display: inline-block;
+	vertical-align: top;
+}
+aside#existing{
+        display: inline-block;
+	vertical-align: top;
+	} 
+hr{
+	margin: 0 50px;
+	margin-top: 10px;
+	width: 3px;
+	height: 310px;
+	display: inline-block;
+	background-color: #e14285;
+}
+

@@ -83,7 +83,7 @@ if ($action == "newuser"){
     
     
     $user2["email2"]= trim(filter_var($_POST['user2']['email2'], FILTER_SANITIZE_EMAIL));
-    $user2["password2"] = trim(preg_match('/^[A-Za-z0-9]{6,10}$/',$_POST['user2']['passsword2']));
+    $user2["password2"] = trim(preg_match('/^[A-Za-z0-9]{6,10}$/',$_POST['user2']['password2']));
     $userfname = trim(filter_var($_POST['user2']['fname2'], FILTER_SANITIZE_STRING));
     $userlname = trim(filter_var($_POST['user2']['lname2'], FILTER_SANITIZE_STRING));
     $user2["name2"] = $userfname." ".$userlname;

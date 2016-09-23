@@ -1,15 +1,16 @@
-
 <style>
     footer {
-    clear: both;
-    position: relative;
-    height: 3em;
-    margin-top: -3em;
-    color:#999;
-}
+        width: 940px;
+        margin: 0 auto;
+        clear: both;
+        height: 60px;
+        opacity: 0.60;
+    }
 </style>
 
-<footer>This website was built by Ariella Epstein, Avi Kauffmann and Orchan as part of 
-the server side development course of the Information Science Dept. from Bar-Ilan 
-University</footer>
-
+<footer>
+    This web application was built by Ariella Epstein, Avi Kauffmann and
+    Orchan Magaramov as part of the Web Applications &amp Dynamic Web Interfaces
+    Course (35-602) from the Information Science Dept. in Bar-Ilan
+    University
+</footer>

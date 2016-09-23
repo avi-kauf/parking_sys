@@ -2,7 +2,7 @@
 include 'header.php';
 ?>
 <div>
-<h1>
+<h1 align="center">
     Our <i>PHP</i> project    
 </h1>
 <h2>What is this project about?</h2>
@@ -18,7 +18,7 @@ free to start reserving once for every day. While if you want to become
 an administrator,a special permission will have to be added to your account
 through the database itself (phpMyAdmin). Once you have that permission, you'll
 have a special interface that will enable you to administrate users and their
-reservations
+reservations.
 </p>
 <h2>For what &amp when was it done?</h2>
 <p>
@@ -30,7 +30,7 @@ was done in the 2nd semester of the year 5776
 <h2>Who worked on it?</h2>
 <p>
     In our team we have Ariella Epstein (328606686), Avraham Kauffmann 
-    (333789436)and Orchan Magaramov (317018224).
+    (333789436) and Orchan Magaramov (317018224).
 </p>
 </div>
 <?php

@@ -10,7 +10,7 @@ include 'header.php';
     In this project we built a system where a user can reserve a single 
     parking spot in a parking lot for a whole day. To create this we used a 
     mixture of tools we learned in this semester like MySQL, PHP and others
-    that we had learn before such as HTML5,CSS and Java Script.</p>
+    that we've learned before such as HTML5,CSS and Java Script.</p>
 
 <p>
     The idea is pretty simple, you create a user in the login page and you are 

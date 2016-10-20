@@ -1,0 +1,229 @@
+* {
+    
+}
+html,body {
+    margin:0 auto;
+    position:relative;
+    width: 1300px;
+    min-height:100%;
+    font-family: Arial, Helvetica, sans-serif;
+   
+}
+header {  
+    background: #73AEDB ;
+    clear: both; 
+}
+header h1{
+    margin: 0 auto;
+    padding: 30px;
+    color: #333;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+}
+
+//Navigation section
+nav ul {
+    list-style-type: none;
+    margin: 0 auto;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid #e7e7e7;
+    background-color: #f3f3f3;
+}
+nav ul li {
+    float: left;
+}
+nav ul li a {
+    display: block;
+    color: #666;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+nav ul li a:hover{
+    background-color: #ddd;
+}
+nav ul li:last-child{
+    float: right;
+    background-color: #7FFFD4;
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    //background-color: #333;
+}
+li {
+    float: left;
+}
+
+.dropdown-tabs {
+    display: none;
+    position: absolute;
+    background-color: #f3f3f3;
+    min-width: 120px;
+}
+
+.dropdown-tabs a {
+    color: #666;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-tabs a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-tabs {
+    display: block;
+}
+
+.content {
+    padding-bottom:100px; 
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+     
+}
+footer {
+    background:#ffab62;
+    width: 100%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    position:absolute;
+    bottom:0;
+    text-align: center;
+    margin: 0 auto;    
+}
+.sameline {
+    display: inline-block;   
+}
+#loginp{
+    text-align: left;
+    display: inline-block;
+    vertical-align: top;
+} 
+.each, .each2 {
+    margin-bottom: 10px;
+}
+.each label {
+    font-size: 18px;
+    margin-top: 2px;
+    margin-left: 10px;
+    width: 100px;
+    display: inline-block;
+    vertical-align: top;
+}
+.each input,.each2 input {
+    font-size: 14px;
+    border: 1px solid #a9a9a9;
+    overflow: auto;
+    padding-right: 10px;
+    width: 200px;
+    height: 20px;
+}
+.each button {
+    margin-left: 115px;
+}
+.each2 button {
+    margin-left: 220px;
+}
+.each2 label {
+    font-size: 18px;
+    margin-top: 2px;
+    margin-left: 10px;
+    width: 210px;
+    display: inline-block;
+    vertical-align: top;
+    
+}
+.alt h3 {
+    text-align: center;
+}
+.alt {
+    text-align: left;
+    display: inline-block;
+    margin: 0 auto;
+    width: 500px;
+    
+}
+hr{
+        margin: 10px 0;
+	margin: 0 50px;
+	margin-top: 10px;
+	width: 3px;
+	height: 310px;
+	display: inline-block;
+	background-color: #f3f3f3;
+        vertical-align: middle;
+} 
+#error {
+    margin-top: 10px;
+    font-size: 16px;
+    display: inline-block;
+    text-align: center;
+    
+     animation:signup-response 2s 1;
+    -webkit-animation:signup-response 0.5s 1;
+    animation-fill-mode: forwards;
+
+    animation-delay:2s;
+    -webkit-animation-delay:1s; 
+    -webkit-animation-fill-mode: forwards;
+
+} 
+
+@keyframes signup-response{
+    from {opacity :1;}
+    to {opacity :0;}
+}
+
+@-webkit-keyframes signup-response{
+    from {opacity :1;}
+    to {opacity :0;}
+}
+  
+.reserve label{
+    font-size: 18px;
+    margin-top: 2px;
+    display: inline-block;
+    vertical-align: top;
+    padding-right: 10px; 
+}
+
+table, thead, td {
+    margin: 0 auto;
+    border: 1px solid #ddd;
+    text-align: left;
+    border-collapse: collapse;
+    padding: 15px;
+ 
+    
+}
+table input {
+    display: block;
+    width: auto;
+
+}
+@media only screen and (max-width: 1300px) {
+   body {
+       width: 900px;
+       position: absolute;
+   }
+  
+}
+
+// About section
+li.Student {
+list-style: none;
+display:inline-block;
+}
+div.stuImg{
+   width:295px; 
+}
+div.aboutUs{
+    text-align:center;
+    color: #898989;
+    margin-left:200px;
+}

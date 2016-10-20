@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
@@ -6,11 +6,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
         
 }
-?> 
-<html> 
+?>
+<html>
     <head>
         <meta charset="UTF-8">
-        <title>Reserve A Spot</title>
         <link rel="stylesheet" type="text/css" href="cssAdmin.css">
     </head>
     <body>

@@ -1,9 +1,14 @@
 <?php
+//written by Ariela Epstein
+
 include 'adminFunctions.php';
 $x=  getUsers();
-$message= "";
+$response= "";
 session_start();
 
+if(!isset($_SESSION['user'])){
+    header("Location:login.php");
+}
       
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
  
@@ -38,9 +43,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if($action =="delete") {
     foreach ($_POST['check1'] as $num => $id) {
     $int = (int)$id;
-    deleteUser($int);
+    if(deleteUser($int) == 1)
+    {$response = "successfully deleted";}
+    else {$response = "problem deleting"; break;}
     }
-          
+    
+    
     unset($_POST['check1']);
     $x = getUsers();
     }
@@ -53,7 +61,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Users</title>
+        <title>All Users</title>
+        <link rel="stylesheet" type="text/css" href="cssAdmin.css">
         <style type="text/css">
             @media print {
             .hidethese {
@@ -78,11 +87,11 @@ function myfunction() {
     </head>
     <body>
        
-        <?php include 'navigation.php'; ?>
+        <?php include 'header.php'; ?>
        
-        
+        <div class="content">
             <h1>All Users</h1>
-            <hr><br>
+            <br>
             <form method="post">
             <table border="1">
             <thead>
@@ -105,9 +114,10 @@ function myfunction() {
             <?php foreach ($value as $ke => $val): if(is_int($ke)) {  ?>
              
             <td> <?php if (isset($_POST['check2']) && in_array($value['User_Email'], $_POST['check2']) ) {
-                if($ke == 2 || $ke == 0) {
-                echo '<input type="text" readonly name="changeme[]" value="' . $val . '" style="background-color:lightyellow;"/>';}
-                else {echo '<input type="text" name="changeme[]" value="' . $val . '" style="background-color:lightyellow;"/>';}
+                $size = strlen($val);
+                if($ke == 2 || $ke == 0) { 
+                echo '<input type="text" size= "'. $size .'" readonly name="changeme[]" value="' . $val . '" style="background-color:lightyellow;" />';}
+                else {echo '<input type="text" size= "'. $size .'" name="changeme[]" value="' . $val . '" style="background-color:lightyellow;" />';}
             }
             elseif(isset($_POST['check2']) && !in_array($value['User_Email'], $_POST['check2']) )
             {echo $val;}
@@ -123,6 +133,7 @@ function myfunction() {
             
             </tbody>
             </table> 
+                <br>
             <?php if(!isset($_POST['check2'])) { echo 
             '<button type="submit" name="action" 
             value="delete"  class="hidethese" onclick="return myfunction();">Delete</button> 
@@ -131,7 +142,11 @@ function myfunction() {
             else {echo '<button type="submit" name="action" value="update2"  class="hidethese" >Update</button>'; }?>
             </form>
 
-           
+            <span id="error"><?php echo $response; ?></span>
+        </div>
+      
+            
+        <?php include 'footer.php'; ?>    
     </body>
 </html>
 

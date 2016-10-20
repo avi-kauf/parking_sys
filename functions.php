@@ -1,7 +1,10 @@
 <?php
- 
+//written by Ariela Epstein 
+
 //connect to database
-    $dsn = 'mysql:host=localhost;dbname=parking_reservation';
+// Real database name - parking_reservation
+// Test database name - phplogin
+    $dsn = 'mysql:host=localhost;dbname=phplogin';
     $username = 'root';
     $password = '';
 
@@ -16,59 +19,91 @@
     
 //fills the select/options with description of parking type in login.php
     function getDescription() {
+        try {
         global $db;
-
         $query = $db->prepare("SELECT Description FROM parking_type");
         $query->execute();
         $result = $query->fetchAll();
-
+        $query->closeCursor();
+        
         $length = sizeof($result);
         $i = 0;
         for ($i; $i <$length; $i++)
         { $result[$i]= $result[$i]["Description"];}
         return $result;  
+        }
+        catch (PDOException $ex)
+        {
+        echo "problem getting description from database".$ex->GetMessage();
+        exit;
+        }
     }
                    
 //checks if the email and password exist in the database        
     function userExists($email, $password){
+        try {
         global $db;
         $query = $db->prepare("SELECT * FROM user WHERE User_Email = :email AND User_Password = :password");
         $query->bindValue(':email', $email);
         $query->bindValue(':password', $password);
         $query->execute();
         $result = $query->fetch();
-
+        $query->closeCursor();
+       
         if ($result) return TRUE;
             else    return FALSE;
-       
+        }
+        catch (PDOException $ex)
+        {
+        echo "problem checking if user exists in database".$ex->GetMessage();
+        exit;
+        }
     }
     
 //checks if the email exists in the database
     function emailExists($email){
+        try {
         global $db;
 	$query = $db->prepare("SELECT * FROM user WHERE User_Email = :email");
 	$query->bindValue(':email', $email);
         $query->execute();
 	$result = $query->fetch();
+        $query->closeCursor();
+       
         if ($result) return TRUE;
         else    return FALSE;
-       
+        }
+        catch (PDOException $ex)
+        {
+        echo "problem checking if email exists in database".$ex->GetMessage();
+        exit;
+        }
     }
     
 //checks if the user is an admin
     function isAdmin($email) {
+        try {
         global $db;
 	$query = $db->prepare("SELECT * FROM user WHERE User_Email = :email AND  admin = 1");
         $query->bindValue(':email', $email);
         $query->execute();
 	$result = $query->fetchAll();
+        $query->closeCursor();
+       
         if ($result) return TRUE;
         else    return FALSE;
-                
+        }
+        catch (PDOException $ex)
+        {
+        echo "problem checking if user is an admin in database".$ex->GetMessage();
+        exit;
+        }
 } 
 
 //adds a new user to the database
     function addNewUser($user2){
+    try 
+    {
     global $db;
     $query = $db->prepare("INSERT INTO user values (:auto , :name, :email, :password, :ptype, :license, :admin)");
     $query->bindValue(':auto', $user2['auto']);
@@ -79,7 +114,18 @@
     $query->bindValue(':license', $user2['license2']);
     $query->bindValue(':admin', $user2['admin']);
     return $query->execute();
+    
+    $rowcount = $query->rowCount();
+    $query->closeCursor();
+    return $rowcount;
     }
+     
+    catch (PDOException $ex)
+    {
+    echo "problem adding a new user in database".$ex->GetMessage();
+    exit;
+    }
+}
     
 //retrieves a new password, updates the user's password, and sends an email to the user with new password    
     function forgotPassword($email){
@@ -127,12 +173,21 @@
       
 //after email is sent, a new password is updated in the database
     function updatePassword($newPassword, $email2) {
+    try{
     global $db;
     $query = $db->prepare("UPDATE user SET User_Password = :password WHERE User_Email = :email");
     $query->bindValue(':password', $newPassword);
     $query->bindValue(':email', $email2);
     $query->execute(); 
+    $query->closeCursor();
+   
     return $query->rowCount() ? true : false;
+    }
+    catch (PDOException $ex)
+    {
+        echo "problem updating password in database".$ex->GetMessage();
+        exit;
+    }  
 }
 
 

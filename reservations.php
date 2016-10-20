@@ -1,9 +1,15 @@
 <?php 
+//written by Ariela Epstein
 
 include 'adminFunctions.php';
 session_start();
 $start="";
 $end="";
+$message= "";
+
+if(!isset($_SESSION['user'])){
+    header("Location:login.php");
+}
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -26,9 +32,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     foreach ($hey as $key => $valuu) {
     $eachone =  explode(" ", $valuu);
     list($a, $b, $c) = $eachone;
-    deleteFromDb($a, $b, $c);
-    }  } 
-    }   
+    if(deleteFromDb($a, $b, $c) != true) {
+      $message = deleteFromDb($a, $b, $c);
+      break;
+    }
+    else {
+      $message = "reservation deleted and quantity restored";
+    }
+    }
+    
+    } 
+    } 
+       
         
 }
     
@@ -38,6 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <head>
         <meta charset="UTF-8">
         <title>All Reservations</title>
+        <link rel="stylesheet" type="text/css" href="cssAdmin.css">
         <style type="text/css">
             @media print {
             .hidethese {
@@ -47,24 +63,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             .finishhere {
                 page-break-after: always;
             }
+            .hidetoo {
+               display: none;
+            }
         }
 
         </style>
     </head>
     <body>
-        <?php include 'navigation.php'; ?>
+        <?php include 'header.php'; ?>
         
+        <div class="content">
         <form method="post">
             <h1>All Reservations</h1>
-            <header>
-                <label for="start">Start</label><input type="date" name="start" value="<?= $start; ?>"/>
-                <label for="end">End</label><input type="date" name="end" value="<?= $end; ?>"/>
-                <button type="submit" name="action" value="get" class="hidethese">Enter</button>
-            </header>
-            <hr><br>
+            <div class="reserve">
+            <label for="start">Start </label><input type="date" name="start" value="<?= $start; ?>"/> &nbsp;
+            <label for="end">End </label><input type="date" name="end" value="<?= $end; ?>"/> &nbsp;
+            <button type="submit" name="action" value="get" class="hidethese">Enter</button> 
+            </div>
+            <br>
             
-        <table border="1">
-        <thead><tr><td></td><td>Date</td><td>User Id</td><td>Parking Lot Id</td><td class="hidethese">Delete</td></tr></thead>
+        <table>
+        <thead><tr><td></td><td>Date</td><td>User Id</td><td>Parking Lot Id</td><td class="hidetoo">Delete</td></tr></thead>
         
         <!-- if $allreservations has data from the db, then display in each row/td the values of each reservation.
         -->
@@ -74,15 +94,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <?php foreach ($value as $val): ?>
         <td><?= $val ?> </td>
         <?php  endforeach; ?>
-        <td><input class="hidethese" type="checkbox" name="check[]" value="<?= implode($value, " "); ?>"/></td> </tr>
+        <td class="hidetoo"><input type="checkbox" name="check[]" value="<?= implode($value, " "); ?>"/></td> </tr>
         <?php endforeach; } ?>
         </tbody>
         </table>
+            <br>
             
         <button type="submit" name="action" value="delete"  class="hidethese" onclick='return confirm("Are you sure you want to delete this reservation?");'>Delete</button>
         <button type="submit" name="action" value="print" onclick="window.print()"  class="hidethese">Print</button>
         </form>
-         
+            
+            <span id="error"><?php echo $message; ?> </span>
+        </div>
+            
+        <?php include 'footer.php'; ?>  
     </body>
 </html>
 

@@ -1,16 +1,9 @@
-<style>
-    footer {
-        width: 940px;
-        margin: 0 auto;
-        clear: both;
-        height: 60px;
-        opacity: 0.60;
-    }
-</style>
-
 <footer>
-    This web application was built by Ariella Epstein, Avi Kauffmann and
-    Orchan Magaramov as part of the Web Applications &amp Dynamic Web Interfaces
-    Course (35-602) from the Information Science Dept. in Bar-Ilan
-    University
+        <div class="sameline">
+   &copy; 2016, Made by: Ariela Epstein, Avi Kauffmann, and Orchan Magaramov.  Course: Web Applications &amp Dynamic Web Interfaces (35-602). 
+    </div>
+        <div class="sameline">
+   <a href="about.php">About us</a>
+    </div>
 </footer>
+

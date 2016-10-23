@@ -142,6 +142,24 @@ function getUsers() {
     exit;
     }
 }
+//BY Avi to get single user
+function getUser($id) {
+    try {
+    global $db;
+    $query = $db->prepare("SELECT * FROM user WHERE User_ID = :id");
+    $query->bindValue(':id', $id);
+    $query->execute();
+    $result = $query->fetchAll();
+    
+    if($result) {return $result;}
+    else{ return FALSE;}
+    }
+    catch (PDOException $ex)
+    {
+    echo "problem getting user from database".$ex->GetMessage();
+    exit;
+    }
+}
 
 //updates a user with new input
 function updateUser($id,$name,$email,$password,$ptype,$license,$admin) {

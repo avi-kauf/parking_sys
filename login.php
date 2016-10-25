@@ -6,8 +6,6 @@ $message="";
 $message2= "";
 $user["email"]=$user["password"]= "";
 $user2["email2"] = "";
-
-
  
 //when the user clicks the new password email link- the fields will contain the new password
 if ($_SERVER["REQUEST_METHOD"] == "GET") { 
@@ -25,7 +23,6 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         session_destroy();
     }
 }
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   
     $type = getDescription();
@@ -40,8 +37,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user["password"] =$_POST['user']['password'];
         
     if (userExists($user['email'], $user['password'])) {
-            
-    $_SESSION['user'] = $user;
+     $user = getUser($user['email'], $user['password']);
+     if(isset($user) && is_array($user)){$user=$user[0];}        
+     $_SESSION['user'] = $user;
             
     if (isAdmin($user['email'])) {
     $_SESSION['user']['admin'] = 1;
@@ -73,7 +71,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user2['email2'] = $user1['email1'];}
  
  }
-
 //when creating a new user- checks the input validity and starts the session for the user
     if ($action == "newuser"){
     $user2["auto"] = NULL;
@@ -104,9 +101,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $_SESSION['user']['admin']= 0; 
     }
     //correction by Avi to avoid session issue
-    $user2['email']=$user2['email2'];
-    $user2['password']=$user2['password2'];
-   
+    $user2 = getUser($user2['email2'], $user['password2']);
+    if(isset($user) && is_array($user)){$user=$user[0];}
     $_SESSION['user'] = $user2;
     header("Location:reserve.php");
     }

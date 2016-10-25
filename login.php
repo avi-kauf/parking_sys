@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
      if(isset($user) && is_array($user)){$user=$user[0];}        
      $_SESSION['user'] = $user;
             
-    if (isAdmin($user['email'])) {
+    if (isAdmin($user['User_Email'])) {
     $_SESSION['user']['admin'] = 1;
     header("Location:reservations.php");
     }

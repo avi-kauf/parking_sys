@@ -102,7 +102,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     //correction by Avi to avoid session issue
     $user2 = getUser($user2['email2'], $user['password2']);
-    if(isset($user) && is_array($user)){$user=$user[0];}
+    if(isset($user2) && is_array($user2)){$user2=$user2[0];}
     $_SESSION['user'] = $user2;
     header("Location:reserve.php");
     }

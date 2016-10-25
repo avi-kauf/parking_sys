@@ -142,7 +142,7 @@ function getUsers() {
     exit;
     }
 }
-//BY Avi to get single user
+//BY Avi to get single user, to use grab $result[0] 
 function getUser($id) {
     try {
     global $db;

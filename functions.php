@@ -189,6 +189,25 @@
         exit;
     }  
 }
+//BY Avi to get single user and add him to the session
+function getUser($email, $pswrd) {
+    try {
+    global $db;
+    $query = $db->prepare("SELECT * FROM user WHERE User_Email = :email AND User_Password = :pswrd");
+    $query->bindValue(':email', $email);
+    $query->bindValue(':pswrd', $pswrd);
+    $query->execute();
+    $result = $query->fetchAll();
+    
+    if($result) {return $result;}
+    else{ return FALSE;}
+    }
+    catch (PDOException $ex)
+    {
+    echo "problem getting user from database".$ex->GetMessage();
+    exit;
+    }
+}
 
 
 

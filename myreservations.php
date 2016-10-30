@@ -140,8 +140,8 @@ else{ ?>
             <br>
             <span id="dots"></span>
         </div>
+         <script type="text/javascript" src="dots.js"></script>   
     <?php } ?> 
         <?php include 'footer.php'; ?>
     </body>
 </html>
-<script type="text/javascript" src="dots.js"></script>

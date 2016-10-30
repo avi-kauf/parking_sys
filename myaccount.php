@@ -83,6 +83,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <link rel="icon" href="media/favicon.ico" />
         <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="cssAdmin.css">
+        <title>My Account</title>
     </head>
     <body>
         <?php include 'header.php'; ?>

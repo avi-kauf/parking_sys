@@ -83,6 +83,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="cssAdmin.css">
         <title>My Reservations</title>
+         <script>
+             /// confirm action
+            function check() {
+            return confirm("Are you sure?");
+            }
+        </script>
     </head>
     <body>
         <?php include 'header.php'; ?>
@@ -132,13 +138,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <div class="each">
             <button type="submit" name="action" value="delete" 
-           onclick="return confirm('.'"Are you sure?"'.');">Delete</button>';}
+           onclick="return check();">Delete</button>';}
           /*update will update user while cancel will run get script to return
            to the view page
            */
            else{ echo '
                <button type="submit" name="action" value="UpdateInfo"
-               onclick="return confirm('.'"Are you sure?"'.');">Confirm</button>
+               onclick="return check();">Confirm</button>
                </div></form>             
                <form method="get">
                <div class="each">
@@ -146,7 +152,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             ?>
        </div>
         </form>
-        
+
         <?php include 'footer.php'; ?>
     </body>
 </html>

@@ -58,6 +58,8 @@ else{
         <meta charset="UTF-8">
         <link rel="icon" href="media/favicon.ico" />
         <link rel="stylesheet" type="text/css" href="cssAdmin.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <title>My Reservations</title>
         <style>
             // MyResrvation section
@@ -133,8 +135,13 @@ else{
         
 <?php }
 else{ ?>
+            <div id="unlog" style="margin-top:100px;text-align:center;">
+            You Are Transferred To Login Page
+            <br>
+            <span id="dots"></span>
+        </div>
     <?php } ?> 
         <?php include 'footer.php'; ?>
     </body>
 </html>
-
+<script type="text/javascript" src="dots.js"></script>

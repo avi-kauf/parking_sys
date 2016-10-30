@@ -80,6 +80,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 <html>
     <head>
+        <link rel="icon" href="media/favicon.ico" />
         <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="cssAdmin.css">
     </head>

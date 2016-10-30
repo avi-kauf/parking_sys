@@ -1,17 +1,12 @@
 <?php 
-session_start();
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        
-}
-if ($_SERVER["REQUEST_METHOD"] == "GET") {
-        
-}
+session_start();     
 ?> 
 <html> 
     <head>
+        <link rel="icon" href="media/favicon.ico" />
+        <link rel="stylesheet" type="text/css" href="cssAdmin.css">
         <meta charset="UTF-8">
         <title>Reserve A Spot</title>
-        <link rel="stylesheet" type="text/css" href="cssAdmin.css">
     </head>
     <body>
         <?php include 'header.php'; ?>

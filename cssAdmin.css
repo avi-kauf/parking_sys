@@ -1,6 +1,7 @@
 * {
     
 }
+
 html,body {
     margin:0 auto;
     position:relative;
@@ -22,7 +23,8 @@ header h1{
     text-align: center;
 }
 
-//Navigation section
+//-- Navigation section - old --//
+
 nav ul {
     list-style-type: none;
     margin: 0 auto;
@@ -31,9 +33,11 @@ nav ul {
     border: 1px solid #e7e7e7;
     background-color: #f3f3f3;
 }
+
 nav ul li {
     float: left;
 }
+
 nav ul li a {
     display: block;
     color: #666;
@@ -44,10 +48,12 @@ nav ul li a {
 nav ul li a:hover{
     background-color: #ddd;
 }
+
 nav ul li:last-child{
     float: right;
     background-color: #7FFFD4;
 }
+
 ul {
     list-style-type: none;
     margin: 0;

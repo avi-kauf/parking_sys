@@ -21,4 +21,10 @@ switch ($val) {
     case  '/parking_reservation/login.php':
     echo('Login');
         break;
-}
+};
+
+if(!isset($_SESSION['user']) || empty($_SESSION['user'])) {
+    $name= "Hello Guest.<br> Please Login.";
+} else {
+    $name= "Hello Back " . $_SESSION['user']['User_Name'] . ".";
+};

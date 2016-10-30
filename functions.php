@@ -189,6 +189,8 @@
         exit;
     }  
 }
+
+
 //BY Avi to get single user and add him to the session
 function getUser($email, $pswrd) {
     try {

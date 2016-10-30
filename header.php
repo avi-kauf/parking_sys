@@ -1,5 +1,13 @@
-<header>
-    <h1><?php include_once('header_selector.php'); ?></h1>
+<style>
+    span#usWell {
+    font-size:medium;
+    color:#666;
+}
+</style>
+<header class="hidetoo">
+    <h1><?php include_once('header_selector.php'); ?><br>
+    <span id="usWell"><?= $name; ?></span>
+    </h1>
 <?php 
 
 if(isset($_SESSION['user'])){
@@ -35,13 +43,13 @@ if( $_SESSION['user']['admin'] == 0) { ?>
     <?php } 
 }
 else { ?>
+
     <nav>
     <ul>
         <li><a href="login.php?logout">Log In</a></li>
     </ul>
     </nav>
 <?php } ?>
-
 </header>
     
         

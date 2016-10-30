@@ -1,12 +1,13 @@
 <html>
     <!-- written by Avraham Kauffmann-->
     <head>
-        <meta charset="UTF-8">
-        <title>About Us</title>
+        <link rel="icon" href="media/favicon.ico" />
         <link rel="stylesheet" type="text/css" href="cssAdmin.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <meta charset="UTF-8">
+        <title>About Us</title>
     </head>
     <body>
 

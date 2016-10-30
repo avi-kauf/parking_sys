@@ -60,9 +60,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     ?> 
 <html>
     <head>
+        <link rel="icon" href="media/favicon.ico" />
+        <link rel="stylesheet" type="text/css" href="cssAdmin.css">
         <meta charset="UTF-8">
         <title>All Users</title>
-        <link rel="stylesheet" type="text/css" href="cssAdmin.css">
         <style type="text/css">
             @media print {
             .hidethese {

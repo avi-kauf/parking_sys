@@ -117,13 +117,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 <html>
     <head>
-        <meta charset="UTF-8">
-        <title>Login/ Sign Up</title>
-        <link rel="stylesheet" type="text/css" href="cssAdmin.css">
-        <script type="text/javascript" src="jquery.js"></script>
+        <link rel="icon" href="media/favicon.ico" />
         <link rel="stylesheet" type="text/css" href="cssAdmin.css">
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+        <script type="text/javascript" src="jquery.js"></script>
         <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+        <meta charset="UTF-8">
+        <title>Login/ Sign Up</title>
         <style type="text/css">
 input[type=text], input[type=email]
 {

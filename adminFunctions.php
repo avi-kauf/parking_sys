@@ -292,3 +292,35 @@ function addPDay($lbday2, $lbid, $lbmotor , $lbemerg, $lbreg, $lbdis) {
     exit;
     }
 }
+//// added by Avi to delete user's reservation when deleting the user [UNDER CONSTRUCTION]
+function deleteUserReserve($uid) {
+    try {
+    global $db;
+    $query = $db->prepare("SELECT M_Total, E_Total, R_Total, D_Total FROM parking_lot WHERE Lot_ID = :thislot ");
+    $query->bindValue(':thislot', $thislot);  
+    $query->execute();
+    $result = $query->fetch();
+
+    if($result) {return $result;}
+    else{ return FALSE;}
+    $query = $db->prepare("DELETE FROM reservation WHERE Rsrv_UserID = :uid");
+    $query->bindValue(':uid', $uid);
+    $query->execute();
+    $query->closeCursor();
+    $rowcount = $query->rowCount() ? "success" : "fail";
+    
+    if($rowcount == "success") {
+    $type = getUserType($uid);
+    if(restoreReserve($date, $pid, $type) == true) {
+        return true;
+    }
+    else {return "failed to restore availability amount";}
+    }
+    else {return "failed to delete reservation and restore availability amount";}
+    }
+    catch (PDOException $ex)
+    {
+    echo "problem deleting reservation from database".$ex->GetMessage();
+    exit;
+    }  
+}

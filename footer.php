@@ -3,7 +3,5 @@
    &copy; 2016, Made by: Ariela Epstein, Avi Kauffmann, and Orchan Magaramov.  Course: Web Applications &amp Dynamic Web Interfaces (35-602). 
     </div>
         <div class="sameline">
-   <a href="about.php">About us</a>
     </div>
 </footer>
-

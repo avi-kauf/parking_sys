@@ -17,6 +17,18 @@ switch ($val) {
     case  '/parking_reservation/myreservations.php':
     echo('My Reservations');
         break;
+        
+    case  '/parking_reservation/reservations.php':
+    echo('Reservations');
+        break;
+    
+    case  '/parking_reservation/users.php':
+    echo('Users');
+        break;
+    
+    case  '/parking_reservation/alter.php':
+    echo('Database');
+        break;
     
     case  '/parking_reservation/login.php':
     echo('Login');

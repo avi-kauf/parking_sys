@@ -170,6 +170,7 @@ function updateUser($id,$name,$email,$password,$ptype,$license,$admin) {
 function deleteUser($id) {
     try {
     global $db;
+    deleteUserReserve($id);
     $query = $db->prepare("DELETE FROM user WHERE User_ID = :id");
     $query->bindValue(':id', $id);
     $query->execute(); 
@@ -292,35 +293,37 @@ function addPDay($lbday2, $lbid, $lbmotor , $lbemerg, $lbreg, $lbdis) {
     exit;
     }
 }
-//// added by Avi to delete user's reservation when deleting the user [UNDER CONSTRUCTION]
+//// added by Avi to delete user's reservation when deleting the user
 function deleteUserReserve($uid) {
-    try {
+    $date=$pid="";
+    try {    
     global $db;
-    $query = $db->prepare("SELECT M_Total, E_Total, R_Total, D_Total FROM parking_lot WHERE Lot_ID = :thislot ");
-    $query->bindValue(':thislot', $thislot);  
-    $query->execute();
-    $result = $query->fetch();
-
-    if($result) {return $result;}
-    else{ return FALSE;}
-    $query = $db->prepare("DELETE FROM reservation WHERE Rsrv_UserID = :uid");
+    $query = $db->prepare("SELECT * FROM reservation WHERE Rsrv_UserID = :uid");
     $query->bindValue(':uid', $uid);
     $query->execute();
-    $query->closeCursor();
-    $rowcount = $query->rowCount() ? "success" : "fail";
-    
-    if($rowcount == "success") {
-    $type = getUserType($uid);
-    if(restoreReserve($date, $pid, $type) == true) {
-        return true;
+    $reservations = $query->fetchAll();
+    if ($reservations) {
+        foreach ($reservations as $row) {
+            foreach ($row as $value=>$item) {
+                switch ($value) {
+                case 'Rsrv_Date':
+                  $date=$item;
+                  break;
+                case 'Rsrv_ParkingLotID':
+                  $pid=$item;
+                  break;
+                default:
+                    break;}
+            }
+            deleteFromDb($date, $uid, $pid);
+       }
     }
-    else {return "failed to restore availability amount";}
-    }
-    else {return "failed to delete reservation and restore availability amount";}
+    else {
+    return FALSE;}
     }
     catch (PDOException $ex)
     {
-    echo "problem deleting reservation from database".$ex->GetMessage();
+    echo "problem in database".$ex->GetMessage();
     exit;
-    }  
+    }
 }

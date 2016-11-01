@@ -362,3 +362,142 @@ function getParkingName($lid){
     exit;
     }
 }
+/// Functions for reserve page
+//add reservation
+function addReserve($rDate, $rUid, $rPid, $rType) {
+    try {
+    global $db;
+    $query = $db->prepare("INSERT INTO `reservation`(`Rsrv_Date`, `Rsrv_UserID`, `Rsrv_ParkingLotID`)
+    VALUES ( :rDate, :rUid, :rPid)");
+    $query->bindValue(':rDate', $rDate);
+    $query->bindValue(':rUid', $rUid);
+    $query->bindValue(':rPid', $rPid);
+    return $query->execute();
+    
+    $rowcount = $query->rowCount();
+    $query->closeCursor();
+    return $rowcount;
+    
+    reduceAvailability($rDate, $rPid, $rType);
+    }
+    catch (PDOException $ex)
+    {
+    echo "problem adding a new reservation to reservation table in database".$ex->GetMessage();
+    exit;
+    }
+}
+// reduce lot from availability (lot by day)after reserve
+function reduceAvailability($date, $pid, $type) {
+    try {
+    global $db;
+    if(in_array("M", $type)) {
+    $query = $db->prepare("UPDATE lot_by_day SET M_Available=  M_Available - 1 WHERE Lot_ID = :pid AND Date = :date"); 
+    $query->bindValue(':date', $date);
+    $query->bindValue(':pid', $pid);
+    $query->execute();
+    $query->closeCursor();
+
+    return $query->rowCount() ? true : false;
+    }
+    if(in_array("E", $type)) {
+    $query = $db->prepare("UPDATE lot_by_day SET E_Available=  E_Available - 1 WHERE Lot_ID = :pid AND Date = :date"); 
+    $query->bindValue(':date', $date);
+    $query->bindValue(':pid', $pid);
+    $query->execute();
+    $query->closeCursor();
+   
+    return $query->rowCount() ? true : false;
+    }
+    if(in_array("R", $type)) {
+    $query = $db->prepare("UPDATE lot_by_day SET R_Available=  R_Available - 1 WHERE Lot_ID = :pid AND Date = :date"); 
+    $query->bindValue(':date', $date);
+    $query->bindValue(':pid', $pid);
+    $query->execute();
+    $query->closeCursor();
+   
+    return $query->rowCount() ? true : false;
+    }
+    if(in_array("D", $type)) {
+    $query = $db->prepare("UPDATE lot_by_day SET D_Available=  D_Available - 1 WHERE Lot_ID = :pid AND Date = :date");
+    $query->bindValue(':date', $date);
+    $query->bindValue(':pid', $pid);
+    $query->execute();
+    $query->closeCursor();
+   
+    return $query->rowCount() ? true : false;
+    }
+    }
+    catch (PDOException $ex)
+    {
+        echo "problem updating availability in database".$ex->GetMessage();
+        exit;
+    }  
+}
+//gets all lot by day
+function getAllLBD() {
+    try {
+    global $db;
+    $query = $db->prepare("SELECT * FROM lot_by_day");
+    $query->execute();
+    $result = $query->fetchAll();
+    
+    if($result) {return $result;}
+    else{ return FALSE;}
+    }
+    catch (PDOException $ex)
+    {
+    echo "problem getting all users from database".$ex->GetMessage();
+    exit;
+    }
+}
+// Get Only available lots
+function availableLots($lots, $usrID, $usrPT){
+    $result=array();
+    $availability=TRUE;
+    // adjust car type to ease search
+    switch ($usrPT) {
+        case "M":
+            $usrPT='M_Available';
+            break;
+        case "E":
+            $usrPT='E_Available';
+            break;
+        case "R":
+            $usrPT='R_Available';
+            break;
+        case "D":
+            $usrPT='D_Available';
+            break;
+        default:
+            $usrPT='';
+            break;
+    }
+    // get usr other reserves to avoid doubles
+    $usrReserves=getReserve($usrID);
+    if(isset($lots) && is_array($lots)) {
+    foreach ($lots as $lbd=>$vals) {
+        if($vals["$usrPT"]>0){
+            if(isset($usrReserves) && is_array($usrReserves)) {
+                foreach ($usrReserves as $rsrv) {
+                    if(in_array( $vals['Date'],$rsrv)){
+                    $availability=FALSE;
+                }}}
+            //enter to list if available
+            if($availability){array_push($result,$vals);}
+       }
+       $availability=TRUE;
+    } 
+}
+return $result;
+}
+///// get the dates(with no repetition) from LBD's
+function getDates($lots){
+    $result=array();
+    if(isset($lots) && is_array($lots)) {
+        foreach ($lots as $lbd=>$vals) {
+                    if(!(in_array( $vals['Date'],$result))){
+                    array_push($result,$vals['Date']);
+                }}}
+   return $result; 
+}
+

@@ -293,7 +293,8 @@ function addPDay($lbday2, $lbid, $lbmotor , $lbemerg, $lbreg, $lbdis) {
     exit;
     }
 }
-//// added by Avi to delete user's reservation when deleting the user
+//// All below added by Avi 
+///delete user's reservation when deleting the user
 function deleteUserReserve($uid) {
     $date=$pid="";
     try {    
@@ -324,6 +325,40 @@ function deleteUserReserve($uid) {
     catch (PDOException $ex)
     {
     echo "problem in database".$ex->GetMessage();
+    exit;
+    }
+}
+//for my reservations page
+function getReserve($rUid){
+    try{
+        global $db;
+        $query = $db->prepare("SELECT Rsrv_Date, Rsrv_ParkingLotID FROM reservation WHERE Rsrv_UserID = :rUid");
+        $query->bindValue(':rUid', $rUid);
+        $query->execute();
+        $result = $query->fetchAll();
+        if($result) {return $result;}
+    else{ return FALSE;}
+    }
+    catch (PDOException $ex)
+    {
+        echo "Problem Getting User Reservations".$ex->GetMessage();
+    exit;
+    }
+}
+/// get info about Parking
+function getParkingName($lid){
+    try{
+        global $db;
+        $query = $db->prepare("SELECT Lot_Name, City, Street_Name, Building_Number FROM parking_lot WHERE Lot_ID = :lid");
+        $query->bindValue(':lid',$lid);
+        $query->execute();
+        $result = $query->fetchAll();
+        if($result) {return $result;}
+    else{ return FALSE;}
+    }
+    catch (PDOException $ex)
+    {
+        echo "Problem Getting User Reserbations".$ex->GetMessage();
     exit;
     }
 }
